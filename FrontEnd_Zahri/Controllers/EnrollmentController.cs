@@ -4,34 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEnd_Zahri.Controllers
 {
-    public class StudentController : Controller
+    public class EnrollmentController : Controller
     {
-        private readonly IStudent _student;
+        private readonly IEnrollment _enrollment;
 
-        public StudentController(IStudent student)
+        public EnrollmentController(IEnrollment enrollment)
         {
-            _student = student;
+            _enrollment = enrollment;
         }
-        public async Task<IActionResult> Index(string? name)
+        public async Task<IActionResult> Index()
         {
-            var result = await _student.GetAll();
+            var result = await _enrollment.GetAll();
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
-
-            IEnumerable<Student> mdel;
-            if (name == null)
-            {
-                mdel = await _student.GetAll();
-            }
-            else
-            {
-                mdel = await _student.GetByName(name);
-            }
-            return View(mdel);
+            return View(result);
         }
-
         public async Task<IActionResult> Details(int id)
         {
-            var m = await _student.GetById(id);
+            var m = await _enrollment.GetById(id);
             return View(m);
         }
 
@@ -41,14 +30,14 @@ namespace FrontEnd_Zahri.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Student student)
+        public async Task<IActionResult> Create(Enrollment enrollment)
         {
             try
             {
-                var result = await _student.Insert(student);
+                var result = await _enrollment.Insert(enrollment);
                 TempData["pesan"] =
                    $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> " +
-                  $"Berhasil menambahkan data Student {result.FirstName}</div>";
+                  $"Berhasil menambahkan data enrollment {result.EnrollmentID}</div>";
 
                 return RedirectToAction("Index");
             }
@@ -59,26 +48,26 @@ namespace FrontEnd_Zahri.Controllers
 
                     $"<div class='alert alert-warning alert-dismissible fade show'>" +
                   $"<button type='button' class='btn-close' data-bs-dismiss='alert'></button> " +
-                  $"Gagal Menambahkan Data Student</div>";
+                  $"Gagal Menambahkan Data Enrollment</div>";
                 return View();
             }
         }
 
         public async Task<IActionResult> Update(int id)
         {
-            var m = await _student.GetById(id);
+            var m = await _enrollment.GetById(id);
             return View(m);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(Student student)
+        public async Task<IActionResult> Update(Enrollment enrollment)
         {
             try
             {
-                var result = await _student.Update(student);
+                var result = await _enrollment.Update(enrollment);
                 TempData["pesan"] =
                   $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> " +
-                 $"Berhasil Update data Student {result.FirstName}</div>";
+                 $"Berhasil Update data Enrollment {result.EnrollmentID}</div>";
 
                 return RedirectToAction("Index");
 
@@ -88,23 +77,24 @@ namespace FrontEnd_Zahri.Controllers
 
                 return View();
 
-            }
+            } 
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var mdel = await _student.GetById(id);
+            var mdel = await _enrollment.GetById(id);
             return View(mdel);
         }
+
         [ActionName("Delete")]
         [HttpPost]
         public async Task<IActionResult> DeletePost(int id)
         {
             try
             {
-                await _student.Delete(id);
+                await _enrollment.Delete(id);
                 TempData["pesan"] =
                       $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> " +
-                      $"Berhasil Hapus data Student {id}</div>";
+                      $"Berhasil Hapus data enrollment {id}</div>";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -114,5 +104,8 @@ namespace FrontEnd_Zahri.Controllers
 
 
         }
+        
+  
+
     }
 }

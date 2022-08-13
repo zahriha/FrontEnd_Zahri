@@ -1,14 +1,14 @@
-﻿@model IEnumerable<FrontEnd_Zahri.Models.Student>
+﻿@model IEnumerable<FrontEnd.Models.Course>
 
 @{
     ViewData["Title"] = "Index";
 }
-<h1 class="mt-4">List Students</h1>
+
+<h1 class="mt-4">List Course</h1>
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
-    <li class="breadcrumb-item active">List Students</li>
+    <li class="breadcrumb-item active">List Course</li>
 </ol>
-
 <div>
     @if (ViewData["pesan"] != null)
     {
@@ -18,7 +18,6 @@
 <div class="card mb-4">
 
     <div class="card-body">
-       
         <p>
             <a class="btn btn-primary btn-lg" asp-action="Create">Create New</a>
         </p>
@@ -39,48 +38,40 @@
         </p>
 
         <table class="table table-dark table-striped">
-
-
-            <tr>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.ID)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th scope="col">
-                    @Html.DisplayNameFor(model => model.EnrollmentDate)
-                </th>
-                <th scope="col">Action</th>
-            </tr>
-
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CourseId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Credits)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ID)
+                            @Html.DisplayFor(modelItem => item.CourseId)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FirstName)
+                            @Html.DisplayFor(modelItem => item.Title)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                            @Html.DisplayFor(modelItem => item.Credits)
                         </td>
                         <td>
                             <a class="btn btn-info btn-sm" asp-action="Details"
-                           asp-route-id="@item.ID">Details</a> &nbsp; &nbsp;
+                           asp-route-id="@item.CourseId">Details</a> &nbsp; &nbsp;
                             <a class="btn btn-primary btn-sm" asp-action="Update"
-                           asp-route-id="@item.ID">Update</a> &nbsp; &nbsp;
+                           asp-route-id="@item.CourseId">Update</a> &nbsp; &nbsp;
                             <a class="btn btn-danger btn-sm" asp-action="Delete"
-                           asp-route-id="@item.ID">Delete</a> &nbsp; &nbsp;
-
+                           asp-route-id="@item.CourseId">Delete</a> &nbsp; &nbsp;
                         </td>
                     </tr>
                 }

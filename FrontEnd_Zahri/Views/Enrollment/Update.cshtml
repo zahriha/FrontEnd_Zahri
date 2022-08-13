@@ -1,0 +1,55 @@
+﻿@model FrontEnd_Zahri.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1 class="mt-4">Update Enrollment</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">List Enrollment</li>
+</ol>
+<hr />
+<div class="card mb-4">
+    <div class="card-body">
+
+        <div class="col-md-6">
+            <form asp-action="Update">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3 mt-3">
+                    <label asp-for="EnrollmentID" class="control-label"></label>
+                    <input asp-for="EnrollmentID" class="form-control" />
+                    <span asp-validation-for="EnrollmentID" class="text-danger"></span>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label asp-for="CourseID" class="control-label"></label>
+                    <input asp-for="CourseID" class="form-control" />
+                    <span asp-validation-for="CourseID" class="text-danger"></span>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label asp-for="StudentID" class="control-label"></label>
+                    <input asp-for="StudentID" class="form-control" />
+                    <span asp-validation-for="StudentID" class="text-danger"></span>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label asp-for="Grade" class="control-label"></label>
+                    <select asp-for="Grade" asp-items="@Html.GetEnumSelectList<Grade>()" class="form-control">
+                    </select>
+                    <span asp-validation-for="Grade" class="text-danger"></span>
+                </div>
+                <div class="mb-3 mt-3">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-controller="Enrollment" asp-action="Index" class="btn btn-primary btn-sm">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

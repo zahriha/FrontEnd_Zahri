@@ -1,0 +1,39 @@
+﻿@model FrontEnd.Models.Course
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item active">Details Course</li>
+</ol>
+<div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CourseId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CourseId)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Credits)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Credits)
+                </dd>
+            </dl>
+        </div>
+        </div>
+        </div>
+        <div>
+            <a asp-controller="Course" asp-action="Index" class="btn btn-primary btn-sm">Back to List</a>
+        </div>

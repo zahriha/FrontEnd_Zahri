@@ -6,6 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IStudent, StudentServices>();
+builder.Services.AddScoped<ICourse, CourseServices>();
+builder.Services.AddScoped<IEnrollment, EnrollmentServices>();
+
 
 var app = builder.Build();
 
