@@ -34,6 +34,11 @@ namespace FrontEnd_Zahri.Controllers
             var m = await _student.GetById(id);
             return View(m);
         }
+        public async Task<IActionResult> StudentC()
+        {
+            var m = await _student.GetStudent();
+            return View(m);
+        }
 
         public IActionResult Create()
         {

@@ -10,6 +10,6 @@ namespace FrontEnd_Zahri.Services
         Task<Student> Update(Student obj);
         Task Delete(int id);
         Task<IEnumerable<Student>> GetByName(string name);
-        //Task<IEnumerable<SamuraiWithQuote>> GetSamuraiWithQuotes();
+        Task<IEnumerable<StudentWithCourse>> GetStudent();
     }
 }
