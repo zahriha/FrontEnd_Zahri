@@ -55,6 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Grade)
             </td>
             <td>
+                
                 <a class="btn btn-info btn-sm" asp-action="Details"
                            asp-route-id="@item.EnrollmentID">Details</a> &nbsp; &nbsp;
                             <a class="btn btn-primary btn-sm" asp-action="Update"
@@ -62,6 +63,7 @@
                             <a class="btn btn-danger btn-sm" asp-action="Delete"
                            asp-route-id="@item.EnrollmentID">Delete</a> &nbsp; &nbsp;
             </td>
+            
         </tr>
 }
     </tbody>

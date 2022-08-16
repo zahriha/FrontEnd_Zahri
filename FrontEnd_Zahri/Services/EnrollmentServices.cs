@@ -22,6 +22,24 @@ namespace FrontEnd_Zahri.Services
             }
         }
 
+        public async Task <Enrollment> GetEnr(int id)
+        {
+            Enrollment enrollment = new Enrollment();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:7192/api/Enrollment/getbyid{id}"))
+
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        enrollment = JsonConvert.DeserializeObject <Enrollment>(apiResponse);
+                    }
+                }
+            }
+            return enrollment;
+        }
+
         public async Task<IEnumerable<Enrollment>> GetAll()
         {
             List<Enrollment> enrollment = new List<Enrollment>();
@@ -53,7 +71,7 @@ namespace FrontEnd_Zahri.Services
             }
             return enrollment;
         }
-
+     
         public async Task<Enrollment> Insert(Enrollment obj)
         {
             Enrollment enrollment = new Enrollment();

@@ -66,7 +66,10 @@
                             @Html.DisplayFor(modelItem => item.Credits)
                         </td>
                         <td>
-                            <a class="btn btn-info btn-sm" asp-action="Details"
+                            
+                            <a class="btn btn-info btn-sm" asp-controller="Enrollment" asp-action="DetailsEnr"
+                           asp-route-id="@item.CourseId">DetailsEnr</a> &nbsp; &nbsp;
+                           <a class="btn btn-info btn-sm" asp-action="Details"
                            asp-route-id="@item.CourseId">Details</a> &nbsp; &nbsp;
                             <a class="btn btn-primary btn-sm" asp-action="Update"
                            asp-route-id="@item.CourseId">Update</a> &nbsp; &nbsp;

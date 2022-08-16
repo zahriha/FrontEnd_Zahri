@@ -24,6 +24,12 @@ namespace FrontEnd_Zahri.Controllers
             return View(m);
         }
 
+        public async Task<IActionResult> DetailsEnr(int id)
+        {
+            var m = await _enrollment.GetEnr(id);
+            return View(m);
+        }
+
         public IActionResult Create()
         {
             return View();

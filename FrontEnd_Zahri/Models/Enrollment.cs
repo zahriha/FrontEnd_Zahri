@@ -1,4 +1,6 @@
-﻿namespace FrontEnd_Zahri.Models
+﻿using FrontEnd.Models;
+
+namespace FrontEnd_Zahri.Models
 {
     public enum Grade
     {
@@ -10,5 +12,7 @@
         public int CourseID { get; set; }
         public int StudentID { get; set; }
         public Grade? Grade { get; set; }
+        public Course Course { get; set; }
+
     }
 }

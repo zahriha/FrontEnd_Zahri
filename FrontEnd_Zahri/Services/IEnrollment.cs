@@ -9,5 +9,8 @@ namespace FrontEnd_Zahri.Services
         Task<Enrollment> Insert(Enrollment obj);
         Task<Enrollment> Update(Enrollment obj);
         Task Delete(int id);
+        Task<Enrollment> GetEnr(int id);
+
     }
 }
+ 
