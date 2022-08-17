@@ -81,23 +81,7 @@ namespace FrontEnd_Zahri.Services
             return student;
         }
 
-        public async Task<StudentDetail> GetStudentById(int? id)
-        {
-            StudentDetail student = new StudentDetail();
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync($"https://localhost:7192/api/Student/ById{id}"))
-
-                {
-                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                    {
-                        string apiResponse = await response.Content.ReadAsStringAsync();
-                        student = JsonConvert.DeserializeObject<StudentDetail>(apiResponse);
-                    }
-                }
-            }
-            return student;
-        }
+       
         public async Task<Student> Insert(Student obj)
         {
             Student stu = new Student();

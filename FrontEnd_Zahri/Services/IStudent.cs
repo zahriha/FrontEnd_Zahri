@@ -11,7 +11,6 @@ namespace FrontEnd_Zahri.Services
         Task Delete(int id);
         Task<IEnumerable<Student>> GetByName(string name);
         Task<IEnumerable<StudentWithCourse>> GetStudent();
-        Task<StudentDetail> GetStudentById(int? id);
 
     }
 }

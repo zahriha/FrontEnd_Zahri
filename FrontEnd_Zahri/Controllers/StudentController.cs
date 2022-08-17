@@ -35,12 +35,6 @@ namespace FrontEnd_Zahri.Controllers
             return View(m);
         }
 
-        public async Task<IActionResult> DetailsStudentC(int id)
-        {
-            var m = await _student.GetStudentById(id);
-            return View(m);
-        }
-
         public async Task<IActionResult> StudentC()
         {
             var m = await _student.GetStudent();

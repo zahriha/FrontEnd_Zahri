@@ -39,18 +39,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EnrollmentDate)
                 </td>
-
-
+                @if(Model!=null)
                 @foreach (var t in item.Enrollments)
                 {
                     <td>
-
                         <p>@t.Course.Title</p>
-
                     </td>
-
                 }
-
             </tr>
         }
     </tbody>

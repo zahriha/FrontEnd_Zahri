@@ -24,16 +24,27 @@ namespace FrontEnd_Zahri.Controllers
             return View(m);
         }
 
-        public async Task<IActionResult> DetailsEnr(int id)
-        {
-            var m = await _enrollment.GetEnr(id);
-            return View(m);
-        }
-
         public IActionResult Create()
         {
             return View();
         }
+
+        /* public IActionResult Create()
+         {
+             StudentDropDownList();
+             return View();
+         }
+
+         private async void StudentDropDownList(object selectedStudent = null)
+         {
+             var stu = from d in _enrollment.GetAll
+                       orderby d.Name
+                       select d;
+
+             ViewBag.StudentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
+
+
+         } */
 
         [HttpPost]
         public async Task<IActionResult> Create(Enrollment enrollment)
