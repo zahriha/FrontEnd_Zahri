@@ -40,22 +40,20 @@
                 </tr>
             </thead>
             <tbody class="text-center">
-                @if (Model!=null)
+
+
+                @foreach (var item in Model)
                 {
-
-
-                    @foreach (var item in Model)
-                    {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.EnrollmentID)
                         </td>
                         <td>
-                           tes
+                            @Html.DisplayFor(modelItem => item.CourseTitle)
                         </td>
 
                         <td>
-                           @item.Student.FirstName
+                            @Html.DisplayFor(modelItem => item.StudentName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Grade)
@@ -72,7 +70,8 @@
 
                     </tr>
                 }
-                 }
+
+
             </tbody>
         </table>
     </div>

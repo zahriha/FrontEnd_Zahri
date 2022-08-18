@@ -1,6 +1,7 @@
 ﻿using FrontEnd_Zahri.Models;
 using FrontEnd_Zahri.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FrontEnd_Zahri.Controllers
 {
@@ -28,7 +29,7 @@ namespace FrontEnd_Zahri.Controllers
             }
             return View(mdel);
         }
-
+       
         public async Task<IActionResult> Details(int id)
         {
             var m = await _student.GetById(id);
@@ -40,8 +41,6 @@ namespace FrontEnd_Zahri.Controllers
             var m = await _student.GetStudent();
             return View(m);
         }
-       
-
         public IActionResult Create()
         {
             return View();

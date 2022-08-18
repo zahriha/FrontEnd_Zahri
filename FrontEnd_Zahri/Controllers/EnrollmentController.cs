@@ -1,16 +1,24 @@
 ﻿using FrontEnd_Zahri.Models;
 using FrontEnd_Zahri.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections;
 
 namespace FrontEnd_Zahri.Controllers
 {
     public class EnrollmentController : Controller
     {
         private readonly IEnrollment _enrollment;
+        private readonly IStudent _student;
+        private readonly ICourse _course;
 
-        public EnrollmentController(IEnrollment enrollment)
+        public int? TotalPages { get; private set; }
+
+        public EnrollmentController(IEnrollment enrollment, IStudent student, ICourse course)
         {
             _enrollment = enrollment;
+            _student = student;
+            _course = course;
         }
         public async Task<IActionResult> Index()
         {
@@ -24,34 +32,21 @@ namespace FrontEnd_Zahri.Controllers
             return View(m);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync()
         {
+           // ViewData["CourseID"] = new SelectList(await _course.GetAll(), "CourseID", "Title");
             return View();
         }
-
-        /* public IActionResult Create()
-         {
-             StudentDropDownList();
-             return View();
-         }
-
-         private async void StudentDropDownList(object selectedStudent = null)
-         {
-             var stu = from d in _enrollment.GetAll
-                       orderby d.Name
-                       select d;
-
-             ViewBag.StudentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
-
-
-         } */
-
+       
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create(Enrollment enrollment)
         {
             try
             {
                 var result = await _enrollment.Insert(enrollment);
+
                 TempData["pesan"] =
                    $"<div class='alert alert-success alert-dismissible fade show'><button type='button' class='btn-close' data-bs-dismiss='alert'></button> " +
                   $"Berhasil menambahkan data enrollment {result.EnrollmentID}</div>";
@@ -68,6 +63,9 @@ namespace FrontEnd_Zahri.Controllers
                   $"Gagal Menambahkan Data Enrollment</div>";
                 return View();
             }
+            //ViewData["CourseID"] = new SelectList(await _course.GetAll(), "CourseID", "Title", enrollment.CourseID);
+            //return View(enrollment);
+
         }
 
         public async Task<IActionResult> Update(int id)
