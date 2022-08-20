@@ -21,12 +21,30 @@ namespace FrontEnd_Zahri.Services
             }
         }
 
-        public async Task<IEnumerable<Student>> GetAll()
+        public async Task<IEnumerable<Student>> GetAll(string token)
         {
             List<Student> student = new List<Student>();
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.GetAsync("https://localhost:7192/api/Student"))
+                {
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        student = JsonConvert.DeserializeObject<List<Student>>(apiResponse);
+                    }
+                   }
+            }
+            return student;
+        }
+
+        public async Task<IEnumerable<Student>> GetByName(string name)
+        {
+            List<Student> student = new List<Student>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var response = await httpClient.GetAsync($"https://localhost:7192/api/Student/ByName?name={name}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     student = JsonConvert.DeserializeObject<List<Student>>(apiResponse);
@@ -34,6 +52,7 @@ namespace FrontEnd_Zahri.Services
             }
             return student;
         }
+
 
         public async Task<Student> GetById(int id)
         {
@@ -48,20 +67,6 @@ namespace FrontEnd_Zahri.Services
                         string apiResponse = await response.Content.ReadAsStringAsync();
                         student = JsonConvert.DeserializeObject<Student>(apiResponse);
                     }
-                }
-            }
-            return student;
-        }
-
-        public async Task<IEnumerable<Student>> GetByName(string name)
-        {
-            List<Student> student = new List<Student>();
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync($"https://localhost:7192/api/Student/ByName?name={name}"))
-                {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    student = JsonConvert.DeserializeObject<List<Student>>(apiResponse);
                 }
             }
             return student;

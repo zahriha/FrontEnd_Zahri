@@ -21,16 +21,20 @@ namespace FrontEnd_Zahri.Services
 
             }
         }
-        public async Task<IEnumerable<Enrollment>> GetAll()
+        public async Task<IEnumerable<Enrollment>> GetAll(string token)
         {
             List<Enrollment> enrollment = new List<Enrollment>();
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.GetAsync("https://localhost:7192/api/Enrollment"))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    enrollment = JsonConvert.DeserializeObject<List<Enrollment>>(apiResponse);
-                }
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        enrollment = JsonConvert.DeserializeObject<List<Enrollment>>(apiResponse);
+                    }
+                  }
             }
             return enrollment;
         }

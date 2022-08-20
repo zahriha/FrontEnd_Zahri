@@ -15,6 +15,10 @@ namespace FrontEnd_Zahri.Controllers
 
         public IActionResult Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                HttpContext.Session.SetString("token", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InphaHJpaGFzYSIsIm5iZiI6MTY2MDk3NTM4OSwiZXhwIjoxNjYwOTc4OTg5LCJpYXQiOjE2NjA5NzUzODl9._JtycvA2aEes17yOKwrxjhzrCQ4hi7OagMYl2YpE8PM");
+            }
             return View();
         }
 

@@ -15,19 +15,24 @@ namespace FrontEnd_Zahri.Controllers
         }
         public async Task<IActionResult> Index(string? name)
         {
-            var result = await _student.GetAll();
+            string myToken = string.Empty;
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                myToken = HttpContext.Session.GetString("token");
+            }
+            var result = await _student.GetAll(myToken);
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
 
             IEnumerable<Student> mdel;
             if (name == null)
             {
-                mdel = await _student.GetAll();
+                mdel = await _student.GetAll(myToken);
             }
-            else
+           else
             {
                 mdel = await _student.GetByName(name);
             }
-            return View(mdel);
+            return View(result);
         }
        
         public async Task<IActionResult> Details(int id)

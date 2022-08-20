@@ -10,6 +10,7 @@ namespace FrontEnd_Zahri.Services
         {
             using (var httpClient = new HttpClient())
             {
+
                 using (var response = await httpClient.DeleteAsync($"https://localhost:7192/api/Course/{id}"))
                 {
                     if (response.StatusCode != System.Net.HttpStatusCode.OK)
@@ -21,15 +22,22 @@ namespace FrontEnd_Zahri.Services
             }
         }
 
-        public async Task<IEnumerable<Course>> GetAll()
+        public async Task<IEnumerable<Course>> GetAll(string token)
         {
+           
             List<Course> course = new List<Course>();
             using (var httpClient = new HttpClient())
             {
+                httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", $"{token}");
                 using (var response = await httpClient.GetAsync("https://localhost:7192/api/Course"))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    course = JsonConvert.DeserializeObject<List<Course>>(apiResponse);
+                    if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                    {
+                        string apiResponse = await response.Content.ReadAsStringAsync();
+                        course = JsonConvert.DeserializeObject<List<Course>>(apiResponse);
+                    }
+                    
+
                 }
             }
             return course;
@@ -40,6 +48,7 @@ namespace FrontEnd_Zahri.Services
             Course course = new Course();
             using (var httpClient = new HttpClient())
             {
+
                 using (var response = await httpClient.GetAsync($"https://localhost:7192/api/Course/{id}"))
 
                 {
@@ -58,6 +67,7 @@ namespace FrontEnd_Zahri.Services
             List<Course> course = new List<Course>();
             using (var httpClient = new HttpClient())
             {
+
                 using (var response = await httpClient.GetAsync($"https://localhost:7192/api/Course/ByName?name={name}"))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
@@ -100,6 +110,7 @@ namespace FrontEnd_Zahri.Services
                Encoding.UTF8, "application/json");
             using (var httpClient = new HttpClient())
             {
+
                 using (var response = await httpClient.PutAsync("https://localhost:7192/api/Course", content))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();

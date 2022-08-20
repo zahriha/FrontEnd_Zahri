@@ -4,7 +4,7 @@ namespace FrontEnd_Zahri.Services
 {
     public interface IStudent
     {
-        Task<IEnumerable<Student>> GetAll();
+        Task<IEnumerable<Student>> GetAll(string token);
         Task<Student> GetById(int id);
         Task<Student> Insert(Student obj);
         Task<Student> Update(Student obj);

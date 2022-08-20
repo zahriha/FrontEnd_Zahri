@@ -1,11 +1,11 @@
-﻿using FrontEnd_Zahri.Services;
-using Microsoft.EntityFrameworkCore;
-
-namespace FrontEnd_Zahri.Models
+﻿namespace FrontEnd_Zahri.Models
 {
-    public class PaginatedList
+    public class PaginatedStudent
     {
-        public List<PaginatedStudent> PaginatedStudent { get; set; } = new List<PaginatedStudent>();
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime EnrollmentDate { get; set; }
         public int TotalPages { get; set; }
         public int PageIndex { get; set; }
 
@@ -24,5 +24,4 @@ namespace FrontEnd_Zahri.Models
             }
         }
     }
-
 }

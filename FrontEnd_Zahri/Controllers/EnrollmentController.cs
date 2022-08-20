@@ -22,7 +22,14 @@ namespace FrontEnd_Zahri.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _enrollment.GetAll();
+            string mytoken = string.Empty;
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                mytoken = HttpContext.Session.GetString("token");
+            }
+
+            var result = await _enrollment.GetAll(mytoken);
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             return View(result);
         }

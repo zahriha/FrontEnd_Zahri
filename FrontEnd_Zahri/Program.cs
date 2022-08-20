@@ -2,12 +2,20 @@ using FrontEnd_Zahri.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "mysession.frontend";
+    options.IdleTimeout = TimeSpan.FromMinutes(2);
+    options.Cookie.IsEssential = true;
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IStudent, StudentServices>();
 builder.Services.AddScoped<ICourse, CourseServices>();
 builder.Services.AddScoped<IEnrollment, EnrollmentServices>();
+builder.Services.AddScoped<IUser, UserServices>();
 
 
 var app = builder.Build();
@@ -24,9 +32,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

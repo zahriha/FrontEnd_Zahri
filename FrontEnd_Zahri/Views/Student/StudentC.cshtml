@@ -10,45 +10,44 @@
     <li class="breadcrumb-item active">List Enrollment</li>
 </ol>
 <div>
-<div class="card mb-4">
+    <div class="card mb-4">
 
-    <div class="card-body">
-<table class="table table-borderless" align="text-center">
-    <thead class="text-center">
-        <tr>
-            <th >
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th >
-                @Html.DisplayNameFor(model => model.EnrollmentDate)
-            </th>
+        <div class="card-body">
+            <table class="table table-borderless" align="text-center">
+                <thead class="text-center">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EnrollmentDate)
+                        </th>
 
-            <th>
-                Course
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody class="text-center">
-        @foreach (var item in Model)
-        {
-            <tr class="text-center">
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
-                </td>
-                @if(Model!=null)
-                @foreach (var t in item.Enrollments)
-                {
-                    <td>
-                        <p>@t.Course.Title</p>
-                    </td>
-                }
-            </tr>
-        }
-    </tbody>
-</table>
-</div>
-</div>
+                        <th>
+                            Course
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (var item in Model)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                            </td>
+                            <td>
+                                @foreach (var t in item.Enrollments)
+                                {
+                                    <p>@t.Course.Title</p>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>

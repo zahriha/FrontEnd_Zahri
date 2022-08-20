@@ -14,12 +14,19 @@ namespace FrontEnd_Zahri.Controllers
         }
         public async Task<IActionResult> Index(string? name)
         {
-            var result = await _course.GetAll();
+            string mytoken = string.Empty;
+
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("token")))
+            {
+                mytoken = HttpContext.Session.GetString("token");
+            }
+                
+            var result = await _course.GetAll(mytoken);
             ViewData["pesan"] = TempData["pesan"] ?? TempData["pesan"];
             IEnumerable<Course> mdel;
             if (name == null)
             {
-                mdel = await _course.GetAll();
+                mdel = await _course.GetAll(mytoken);
             }
             else
             {
@@ -30,6 +37,8 @@ namespace FrontEnd_Zahri.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
+           
+
             var m = await _course.GetById(id);
             return View(m);
         }
@@ -66,6 +75,8 @@ namespace FrontEnd_Zahri.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
+            
+
             var m = await _course.GetById(id);
             return View(m);
         }
@@ -73,6 +84,7 @@ namespace FrontEnd_Zahri.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Course course)
         {
+            
             try
             {
                 var result = await _course.Update(course);
@@ -93,13 +105,16 @@ namespace FrontEnd_Zahri.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            
             var mdel = await _course.GetById(id);
             return View(mdel);
         }
+
         [ActionName("Delete")]
         [HttpPost]
         public async Task<IActionResult> DeletePost(int id)
         {
+           
             try
             {
                 await _course.Delete(id);
